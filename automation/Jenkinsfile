@@ -1,32 +1,41 @@
 pipeline {
     agent any
+
+    environment {
+        PROJECT_DIR = 'C:\\Capgemini\\Notes_Automation_Framework\\automation'
+    }
+
     stages {
-        stage('Install Dependencies') {
+        stage('Checkout SCM') {
             steps {
-                bat 'cd C:\\Capgemini\\Notes_Automation_Framework\\automation && python -m pip install -r requirements.txt'
+                echo 'Code ready'
             }
         }
+
         stage('Run API Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat 'cd C:\\Capgemini\\Notes_Automation_Framework\\automation && python -m pytest tests/api -n 2 --alluredir=allure-results -v'
+                    bat "cd %PROJECT_DIR% && venv\\Scripts\\pytest.exe tests/api -n 2 --alluredir=allure-results -v"
                 }
             }
         }
+
         stage('Run UI Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat 'cd C:\\Capgemini\\Notes_Automation_Framework\\automation && python -m pytest tests/ui -n 2 --alluredir=allure-results -v'
+                    bat "cd %PROJECT_DIR% && venv\\Scripts\\pytest.exe tests/ui -n 2 --alluredir=allure-results -v"
                 }
             }
         }
+
         stage('Run Hybrid E2E Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat 'cd C:\\Capgemini\\Notes_Automation_Framework\\automation && python -m pytest tests/e2e --alluredir=allure-results -v'
+                    bat "cd %PROJECT_DIR% && venv\\Scripts\\pytest.exe tests/e2e --alluredir=allure-results -v"
                 }
             }
         }
+
         stage('Generate Allure Report') {
             steps {
                 allure(
@@ -37,6 +46,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             archiveArtifacts(
