@@ -1,0 +1,30 @@
+# Virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Test artifacts
+allure-results/
+allure-report/
+screenshots/
+logs/
+
+# Environment secrets
+.env
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# WebDriver cache
+.wdm/

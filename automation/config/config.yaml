@@ -1,0 +1,23 @@
+ui:
+  base_url: "https://practice.expandtesting.com/notes/app"
+  browser: "chrome"
+  headless: false
+  implicit_wait: 0
+  explicit_wait: 20
+
+api:
+  base_url: "https://practice.expandtesting.com/notes/api"
+  timeout: 5
+  max_retries: 3
+  performance_threshold_sec: 2.0
+
+test_user:
+  email: "capstone_tester@example.com"
+  password: "Test@12345!"
+  name: "Capstone Tester"
+
+reporting:
+  allure_dir: "allure-results"
+  screenshot_dir: "screenshots"
+  log_dir: "logs"
+  log_level: "DEBUG"
